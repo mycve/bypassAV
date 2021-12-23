@@ -6,3 +6,5 @@
 ### release
 	move to release [bypass.pdf]
 	
+	
+### 仅供学习，及包括不限于 合规合法的攻防，教育等目的使用
