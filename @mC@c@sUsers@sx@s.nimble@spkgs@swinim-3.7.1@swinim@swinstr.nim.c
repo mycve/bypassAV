@@ -48,11 +48,11 @@ STRING_LITERAL(TM__zjeWotTwb2UTl5yWEPxJRw_10, "oleaut32", 8);
 STRING_LITERAL(TM__zjeWotTwb2UTl5yWEPxJRw_11, "oleaut32", 8);
 N_LIB_PRIVATE NIM_BOOL isOpenArrayStringable_6758Z85sersZxZOnimbleZpkgsZwinim4551O55O49ZwinimZwinstr_559;
 static void* TM__zjeWotTwb2UTl5yWEPxJRw_2;
-tyProc__9b1AZ3AfnxJABiQ9b6lLDjDQ Dl_143654930_;
+tyProc__9b1AZ3AfnxJABiQ9b6lLDjDQ Dl_100663314_;
 static void* TM__zjeWotTwb2UTl5yWEPxJRw_8;
-tyProc__uaa3EeY5nSKYBlex9baos2Q Dl_143654939_;
-tyProc__uaa3EeY5nSKYBlex9baos2Q Dl_143654921_;
-tyProc__ZrYgC1xSVfR0hlv62dg3eA Dl_143654923_;
+tyProc__uaa3EeY5nSKYBlex9baos2Q Dl_100663323_;
+tyProc__uaa3EeY5nSKYBlex9baos2Q Dl_100663305_;
+tyProc__ZrYgC1xSVfR0hlv62dg3eA Dl_100663307_;
 static N_INLINE(NCSTRING, nimToCStringConv)(NimStringDesc* s) {
 	NCSTRING result;
 	result = (NCSTRING)0;
@@ -88,13 +88,13 @@ N_LIB_PRIVATE N_NIMCALL(NimStringDesc*, UNICODEminusgtstring__6758Z85sersZxZOnim
 		NIM_CHAR* T5_;
 		NI32 T6_;
 		if (!!((source == 0))) goto LA3_;
-		mLen = Dl_143654930_(((NI32) 65001), ((NI32) 0), source, ((NI32) (L)), ((NIM_CHAR*) NIM_NIL), ((NI32) 0), ((NIM_CHAR*) NIM_NIL), ((NI32*) NIM_NIL));
+		mLen = Dl_100663314_(((NI32) 65001), ((NI32) 0), source, ((NI32) (L)), ((NIM_CHAR*) NIM_NIL), ((NI32) 0), ((NIM_CHAR*) NIM_NIL), ((NI32*) NIM_NIL));
 		if ((mLen) < ((NI) 0) || (mLen) > ((NI) 2147483647)){ raiseRangeErrorI(mLen, ((NI) 0), ((NI) 2147483647)); }
 		result = mnewString(((NI) (mLen)));
 		T5_ = (NIM_CHAR*)0;
 		T5_ = amp__6758Z85sersZxZOnimbleZpkgsZwinim4551O55O49ZwinimZwinstr_105(result);
 		T6_ = (NI32)0;
-		T6_ = Dl_143654930_(((NI32) 65001), ((NI32) 0), source, ((NI32) (L)), T5_, mLen, ((NIM_CHAR*) NIM_NIL), ((NI32*) NIM_NIL));
+		T6_ = Dl_100663314_(((NI32) 65001), ((NI32) 0), source, ((NI32) (L)), T5_, mLen, ((NIM_CHAR*) NIM_NIL), ((NI32*) NIM_NIL));
 		(void)(T6_);
 	}
 	LA3_: ;
@@ -134,13 +134,13 @@ N_LIB_PRIVATE N_NIMCALL(NimStringDesc*, UTF8minusgtwstring__6758Z85sersZxZOnimbl
 		NU16* T5_;
 		NI32 T6_;
 		if (!!((source == 0))) goto LA3_;
-		wLen = Dl_143654923_(((NI32) 65001), ((NI32) 0), source, ((NI32) (L)), ((NU16*) NIM_NIL), ((NI32) 0));
+		wLen = Dl_100663307_(((NI32) 65001), ((NI32) 0), source, ((NI32) (L)), ((NU16*) NIM_NIL), ((NI32) 0));
 		if ((wLen) < ((NI) 0) || (wLen) > ((NI) 2147483647)){ raiseRangeErrorI(wLen, ((NI) 0), ((NI) 2147483647)); }
 		result = newWString_6758Z85sersZxZOnimbleZpkgsZwinim4551O55O49ZwinimZwinstr_63(((NI) (wLen)));
 		T5_ = (NU16*)0;
 		T5_ = amp__6758Z85sersZxZOnimbleZpkgsZwinim4551O55O49ZwinimZwinstr_111(result);
 		T6_ = (NI32)0;
-		T6_ = Dl_143654923_(((NI32) 65001), ((NI32) 0), source, ((NI32) (L)), T5_, wLen);
+		T6_ = Dl_100663307_(((NI32) 65001), ((NI32) 0), source, ((NI32) (L)), T5_, wLen);
 		(void)(T6_);
 	}
 	LA3_: ;
@@ -171,11 +171,11 @@ N_LIB_PRIVATE N_NIMCALL(NU16*, winstrConverterStringToLPWSTR_6758Z85sersZxZOnimb
 N_LIB_PRIVATE N_NIMCALL(void, winim_winstrDatInit000)(void) {
 if (!((TM__zjeWotTwb2UTl5yWEPxJRw_2 = nimLoadLibrary(((NimStringDesc*) &TM__zjeWotTwb2UTl5yWEPxJRw_4)))
 )) nimLoadLibraryError(((NimStringDesc*) &TM__zjeWotTwb2UTl5yWEPxJRw_5));
-	Dl_143654930_ = (tyProc__9b1AZ3AfnxJABiQ9b6lLDjDQ) nimGetProcAddr(TM__zjeWotTwb2UTl5yWEPxJRw_2, "WideCharToMultiByte");
+	Dl_100663314_ = (tyProc__9b1AZ3AfnxJABiQ9b6lLDjDQ) nimGetProcAddr(TM__zjeWotTwb2UTl5yWEPxJRw_2, "WideCharToMultiByte");
 if (!((TM__zjeWotTwb2UTl5yWEPxJRw_8 = nimLoadLibrary(((NimStringDesc*) &TM__zjeWotTwb2UTl5yWEPxJRw_10)))
 )) nimLoadLibraryError(((NimStringDesc*) &TM__zjeWotTwb2UTl5yWEPxJRw_11));
-	Dl_143654939_ = (tyProc__uaa3EeY5nSKYBlex9baos2Q) nimGetProcAddr(TM__zjeWotTwb2UTl5yWEPxJRw_8, "SysStringLen");
-	Dl_143654921_ = (tyProc__uaa3EeY5nSKYBlex9baos2Q) nimGetProcAddr(TM__zjeWotTwb2UTl5yWEPxJRw_2, "lstrlenW");
-	Dl_143654923_ = (tyProc__ZrYgC1xSVfR0hlv62dg3eA) nimGetProcAddr(TM__zjeWotTwb2UTl5yWEPxJRw_2, "MultiByteToWideChar");
+	Dl_100663323_ = (tyProc__uaa3EeY5nSKYBlex9baos2Q) nimGetProcAddr(TM__zjeWotTwb2UTl5yWEPxJRw_8, "SysStringLen");
+	Dl_100663305_ = (tyProc__uaa3EeY5nSKYBlex9baos2Q) nimGetProcAddr(TM__zjeWotTwb2UTl5yWEPxJRw_2, "lstrlenW");
+	Dl_100663307_ = (tyProc__ZrYgC1xSVfR0hlv62dg3eA) nimGetProcAddr(TM__zjeWotTwb2UTl5yWEPxJRw_2, "MultiByteToWideChar");
 }
 

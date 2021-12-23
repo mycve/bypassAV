@@ -61,6 +61,7 @@ N_LIB_PRIVATE N_NIMCALL(void*, nimGetProcAddr)(void* lib, NCSTRING name);
 STRING_LITERAL(TM__Az9aStCqZyHdXRb5O9bpGz9bw_4, "ole32", 5);
 STRING_LITERAL(TM__Az9aStCqZyHdXRb5O9bpGz9bw_5, "ole32", 5);
 N_LIB_PRIVATE TNimType NTIlonglong__Aav8dQoMlCFnZRxA0IhTHQ_;
+N_LIB_PRIVATE TNimType NTIlong__sVg18TP9cLifHyygRe9cro9aA_;
 N_LIB_PRIVATE TNimType NTIbyte__k3HXouOuhqAKq0dx450lXQ_;
 N_LIB_PRIVATE TNimType NTIshort__kDPg4wXyR8DDyA0MeEjIsw_;
 N_LIB_PRIVATE TNimType NTIfloat__C875xFvYpI7aGybrDGHIaQ_;
@@ -69,7 +70,6 @@ extern TNimType NTIvartype__M4na42GvebBMnI5wV9cYMxg_;
 N_LIB_PRIVATE TNimType NTIptrolechar__9arplNu1iE9bhlDxcL6A4PMw_;
 N_LIB_PRIVATE TNimType NTIptrbyte__cG1a2XAxsP28AUq2q9aXnNg_;
 N_LIB_PRIVATE TNimType NTIptrshort__BjHmAJOH9agj4KRxOkanazQ_;
-extern TNimType NTIint5150__sVg18TP9cLifHyygRe9cro9aA_;
 N_LIB_PRIVATE TNimType NTIptrlong__9awHbpuyuG8AxbsaqeBLKDQ_;
 N_LIB_PRIVATE TNimType NTIptrlonglong__qTZjETMuYhaATb9arhin3WA_;
 N_LIB_PRIVATE TNimType NTIptrfloat__K9c5mNCKsxyPa9bhQF1Un42w_;
@@ -78,13 +78,18 @@ N_LIB_PRIVATE TNimType NTIptrbstr__Pdw3MEiEie9cIIBXdRF4aZg_;
 N_LIB_PRIVATE TNimType NTIchar__nmiMWKVIe46vacnhAFrQvw_;
 N_LIB_PRIVATE TNimType NTIptrchar__9b60r3P3z08159cCfYvgtoSg_;
 static void* TM__Az9aStCqZyHdXRb5O9bpGz9bw_2;
-tyProc__BPQkGXZ9bepMVJITTbu8UUg Dl_128984050_;
+tyProc__BPQkGXZ9bepMVJITTbu8UUg Dl_70263803_;
 N_LIB_PRIVATE N_NIMCALL(void, winim_windefDatInit000)(void) {
 NTIlonglong__Aav8dQoMlCFnZRxA0IhTHQ_.size = sizeof(NI64);
 NTIlonglong__Aav8dQoMlCFnZRxA0IhTHQ_.align = NIM_ALIGNOF(NI64);
 NTIlonglong__Aav8dQoMlCFnZRxA0IhTHQ_.kind = 35;
 NTIlonglong__Aav8dQoMlCFnZRxA0IhTHQ_.base = 0;
 NTIlonglong__Aav8dQoMlCFnZRxA0IhTHQ_.flags = 3;
+NTIlong__sVg18TP9cLifHyygRe9cro9aA_.size = sizeof(NI32);
+NTIlong__sVg18TP9cLifHyygRe9cro9aA_.align = NIM_ALIGNOF(NI32);
+NTIlong__sVg18TP9cLifHyygRe9cro9aA_.kind = 34;
+NTIlong__sVg18TP9cLifHyygRe9cro9aA_.base = 0;
+NTIlong__sVg18TP9cLifHyygRe9cro9aA_.flags = 3;
 NTIbyte__k3HXouOuhqAKq0dx450lXQ_.size = sizeof(NU8);
 NTIbyte__k3HXouOuhqAKq0dx450lXQ_.align = NIM_ALIGNOF(NU8);
 NTIbyte__k3HXouOuhqAKq0dx450lXQ_.kind = 41;
@@ -123,7 +128,7 @@ NTIptrshort__BjHmAJOH9agj4KRxOkanazQ_.flags = 3;
 NTIptrlong__9awHbpuyuG8AxbsaqeBLKDQ_.size = sizeof(NI32*);
 NTIptrlong__9awHbpuyuG8AxbsaqeBLKDQ_.align = NIM_ALIGNOF(NI32*);
 NTIptrlong__9awHbpuyuG8AxbsaqeBLKDQ_.kind = 21;
-NTIptrlong__9awHbpuyuG8AxbsaqeBLKDQ_.base = (&NTIint5150__sVg18TP9cLifHyygRe9cro9aA_);
+NTIptrlong__9awHbpuyuG8AxbsaqeBLKDQ_.base = (&NTIlong__sVg18TP9cLifHyygRe9cro9aA_);
 NTIptrlong__9awHbpuyuG8AxbsaqeBLKDQ_.flags = 3;
 NTIptrlonglong__qTZjETMuYhaATb9arhin3WA_.size = sizeof(NI64*);
 NTIptrlonglong__qTZjETMuYhaATb9arhin3WA_.align = NIM_ALIGNOF(NI64*);
@@ -157,6 +162,6 @@ NTIptrchar__9b60r3P3z08159cCfYvgtoSg_.base = (&NTIchar__nmiMWKVIe46vacnhAFrQvw_)
 NTIptrchar__9b60r3P3z08159cCfYvgtoSg_.flags = 3;
 if (!((TM__Az9aStCqZyHdXRb5O9bpGz9bw_2 = nimLoadLibrary(((NimStringDesc*) &TM__Az9aStCqZyHdXRb5O9bpGz9bw_4)))
 )) nimLoadLibraryError(((NimStringDesc*) &TM__Az9aStCqZyHdXRb5O9bpGz9bw_5));
-	Dl_128984050_ = (tyProc__BPQkGXZ9bepMVJITTbu8UUg) nimGetProcAddr(TM__Az9aStCqZyHdXRb5O9bpGz9bw_2, "IsEqualGUID");
+	Dl_70263803_ = (tyProc__BPQkGXZ9bepMVJITTbu8UUg) nimGetProcAddr(TM__Az9aStCqZyHdXRb5O9bpGz9bw_2, "IsEqualGUID");
 }
 

@@ -222,12 +222,15 @@ static N_INLINE(NI, pluspercent__system_696)(NI x, NI y);
 N_LIB_PRIVATE N_NIMCALL(void, raiseExceptionEx)(Exception* e, NCSTRING ename, NCSTRING procname, NCSTRING filename, NI line);
 N_LIB_PRIVATE N_NOINLINE(void, raiseOverflow)(void);
 N_LIB_PRIVATE N_NIMCALL(void*, newSeq)(TNimType* typ, NI len);
+N_LIB_PRIVATE N_NIMCALL(void, nimGCvisit)(void* d, NI op);
+static N_NIMCALL(void, Marker_tySequence__sM4lkSb7zS6F7OVMvW9cffQ)(void* p, NI op);
 STRING_LITERAL(TM__MnCJ0VAmeZ9aTATUB39cx60Q_4, "kernel32", 8);
 STRING_LITERAL(TM__MnCJ0VAmeZ9aTATUB39cx60Q_5, "kernel32", 8);
 extern TNimType NTIrefioerror__HMIVdYjdZYWskTmTQVo5BQ_;
 extern TNimType NTIioerror__iLZrPn9anoh9ad1MmO0RczFw_;
 STRING_LITERAL(TM__MnCJ0VAmeZ9aTATUB39cx60Q_10, "cannot write string to file", 27);
-extern TNimType NTIseqLstringT__sM4lkSb7zS6F7OVMvW9cffQ_;
+extern TNimType NTIstring__77mFvmsOLKik79ci2hXkHEg_;
+N_LIB_PRIVATE TNimType NTIseqLstringT__sM4lkSb7zS6F7OVMvW9cffQ_;
 static void* TM__MnCJ0VAmeZ9aTATUB39cx60Q_2;
 tyProc__YrlAFY4fseJeExebH9aRGbw Dl_28312109_;
 tyProc__YrlAFY4fseJeExebH9aRGbw Dl_28312111_;
@@ -411,6 +414,15 @@ N_LIB_PRIVATE N_NIMCALL(void, echoBinSafe)(NimStringDesc** args, NI argsLen_0) {
 	T5_ = fflush(stdout);
 	(void)(T5_);
 }
+static N_NIMCALL(void, Marker_tySequence__sM4lkSb7zS6F7OVMvW9cffQ)(void* p, NI op) {
+	tySequence__sM4lkSb7zS6F7OVMvW9cffQ* a;
+	NI T1_;
+	a = (tySequence__sM4lkSb7zS6F7OVMvW9cffQ*)p;
+	T1_ = (NI)0;
+	for (T1_ = 0; T1_ < (a ? a->Sup.len : 0); T1_++) {
+	nimGCvisit((void*)a->data[T1_], op);
+	}
+}
 N_LIB_PRIVATE N_NIMCALL(tySequence__sM4lkSb7zS6F7OVMvW9cffQ*, newSeq_systemZio_590)(NI len) {
 	tySequence__sM4lkSb7zS6F7OVMvW9cffQ* result;
 	result = (tySequence__sM4lkSb7zS6F7OVMvW9cffQ*)0;
@@ -443,6 +455,11 @@ N_LIB_PRIVATE N_NIMCALL(void, stdlib_ioInit000)(void) {
 }
 
 N_LIB_PRIVATE N_NIMCALL(void, stdlib_ioDatInit000)(void) {
+NTIseqLstringT__sM4lkSb7zS6F7OVMvW9cffQ_.size = sizeof(tySequence__sM4lkSb7zS6F7OVMvW9cffQ*);
+NTIseqLstringT__sM4lkSb7zS6F7OVMvW9cffQ_.align = NIM_ALIGNOF(tySequence__sM4lkSb7zS6F7OVMvW9cffQ*);
+NTIseqLstringT__sM4lkSb7zS6F7OVMvW9cffQ_.kind = 24;
+NTIseqLstringT__sM4lkSb7zS6F7OVMvW9cffQ_.base = (&NTIstring__77mFvmsOLKik79ci2hXkHEg_);
+NTIseqLstringT__sM4lkSb7zS6F7OVMvW9cffQ_.marker = Marker_tySequence__sM4lkSb7zS6F7OVMvW9cffQ;
 if (!((TM__MnCJ0VAmeZ9aTATUB39cx60Q_2 = nimLoadLibrary(((NimStringDesc*) &TM__MnCJ0VAmeZ9aTATUB39cx60Q_4)))
 )) nimLoadLibraryError(((NimStringDesc*) &TM__MnCJ0VAmeZ9aTATUB39cx60Q_5));
 	Dl_28312109_ = (tyProc__YrlAFY4fseJeExebH9aRGbw) nimGetProcAddr(TM__MnCJ0VAmeZ9aTATUB39cx60Q_2, "SetConsoleOutputCP");

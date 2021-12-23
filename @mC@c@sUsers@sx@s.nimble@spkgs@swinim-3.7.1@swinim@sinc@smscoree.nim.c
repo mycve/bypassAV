@@ -46,7 +46,7 @@ N_LIB_PRIVATE N_NIMCALL(void*, nimGetProcAddr)(void* lib, NCSTRING name);
 STRING_LITERAL(TM__2fXpvVip9cz2du6iLB2sfOw_4, "mscoree", 7);
 STRING_LITERAL(TM__2fXpvVip9cz2du6iLB2sfOw_5, "mscoree", 7);
 static void* TM__2fXpvVip9cz2du6iLB2sfOw_2;
-tyProc__QOiFtZpE8c3zN4C9aqU9blOA Dl_140512769_;
+tyProc__QOiFtZpE8c3zN4C9aqU9blOA Dl_81792513_;
 N_LIB_PRIVATE N_NIMCALL(tyObject_IUnknown__GaCOTm3fAeQng3LkqGK9cpw*, winimConverterICLRRuntimeInfoToIUnknown_6758Z85sersZxZOnimbleZpkgsZwinim4551O55O49ZwinimZincZmscoree_7187)(tyObject_ICLRRuntimeInfo__XOK1J81FSgMkvppKAUt1Gg* x) {
 	tyObject_IUnknown__GaCOTm3fAeQng3LkqGK9cpw* result;
 	result = (tyObject_IUnknown__GaCOTm3fAeQng3LkqGK9cpw*)0;
@@ -86,6 +86,6 @@ N_LIB_PRIVATE N_NIMCALL(tyObject_IUnknown__GaCOTm3fAeQng3LkqGK9cpw*, winimConver
 N_LIB_PRIVATE N_NIMCALL(void, winim_mscoreeDatInit000)(void) {
 if (!((TM__2fXpvVip9cz2du6iLB2sfOw_2 = nimLoadLibrary(((NimStringDesc*) &TM__2fXpvVip9cz2du6iLB2sfOw_4)))
 )) nimLoadLibraryError(((NimStringDesc*) &TM__2fXpvVip9cz2du6iLB2sfOw_5));
-	Dl_140512769_ = (tyProc__QOiFtZpE8c3zN4C9aqU9blOA) nimGetProcAddr(TM__2fXpvVip9cz2du6iLB2sfOw_2, "CLRCreateInstance");
+	Dl_81792513_ = (tyProc__QOiFtZpE8c3zN4C9aqU9blOA) nimGetProcAddr(TM__2fXpvVip9cz2du6iLB2sfOw_2, "CLRCreateInstance");
 }
 
