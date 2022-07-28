@@ -15,9 +15,17 @@
 #undef far
 #undef powerpc
 #undef unix
-#define nimfr_(x, y)
-#define nimln_(x, y)
-typedef struct NimStringDesc NimStringDesc;
+  #  define nimfr_(proc, file) \
+      TFrame FR_; \
+      FR_.procname = proc; FR_.filename = file; FR_.line = 0; FR_.len = 0; nimFrame(&FR_);
+
+  #  define nimfrs_(proc, file, slots, length) \
+      struct {TFrame* prev;NCSTRING procname;NI line;NCSTRING filename; NI len; VarSlot s[slots];} FR_; \
+      FR_.procname = proc; FR_.filename = file; FR_.line = 0; FR_.len = length; nimFrame((TFrame*)&FR_);
+
+  #  define nimln_(n, file) \
+      FR_.line = n; FR_.filename = file;
+  typedef struct NimStringDesc NimStringDesc;
 typedef struct TGenericSeq TGenericSeq;
 struct TGenericSeq {
 NI len;
@@ -31,6 +39,15 @@ N_LIB_PRIVATE N_NOINLINE(void, raiseIndexError2)(NI i, NI n);
 N_LIB_PRIVATE N_NOINLINE(void, raiseOverflow)(void);
 N_LIB_PRIVATE N_NOINLINE(void, raiseDivByZero)(void);
 static N_INLINE(NIM_BOOL, nimDivInt)(NI a, NI b, NI* res);
+static N_INLINE(void, nimFrame)(TFrame* s);
+N_LIB_PRIVATE N_NOINLINE(void, callDepthLimitReached_system_2999)(void);
+static N_INLINE(void, popFrame)(void);
+extern TFrame* framePtr_system_2566;
+extern TFrame* framePtr_system_2566;
+extern TFrame* framePtr_system_2566;
+extern TFrame* framePtr_system_2566;
+extern TFrame* framePtr_system_2566;
+extern TFrame* framePtr_system_2566;
 static N_INLINE(NIM_BOOL, nimDivInt)(NI a, NI b, NI* res) {
 	NIM_BOOL result;
 	result = (NIM_BOOL)0;
@@ -52,11 +69,36 @@ static N_INLINE(NIM_BOOL, nimDivInt)(NI a, NI b, NI* res) {
 	LA1_: ;
 	return result;
 }
+static N_INLINE(void, nimFrame)(TFrame* s) {
+	{
+		if (!(framePtr_system_2566 == ((TFrame*) NIM_NIL))) goto LA3_;
+		(*s).calldepth = ((NI16) 0);
+	}
+	goto LA1_;
+	LA3_: ;
+	{
+		(*s).calldepth = (NI16)((*framePtr_system_2566).calldepth + ((NI16) 1));
+	}
+	LA1_: ;
+	(*s).prev = framePtr_system_2566;
+	framePtr_system_2566 = s;
+	{
+		if (!((*s).calldepth == ((NI16) 2000))) goto LA8_;
+		callDepthLimitReached_system_2999();
+	}
+	LA8_: ;
+}
+static N_INLINE(void, popFrame)(void) {
+	framePtr_system_2566 = (*framePtr_system_2566).prev;
+}
 N_LIB_PRIVATE N_NIMCALL(NI, parseSaturatedNatural_pureZparseutils_316)(NimStringDesc* s, NI* b, NI start) {
 	NI result;
 	NI i;
+	nimfr_("parseSaturatedNatural", "E:\\Software\\nim\\lib\\pure\\parseutils.nim");
 	result = (NI)0;
+	nimln_(505, "E:\\Software\\nim\\lib\\pure\\parseutils.nim");
 	i = start;
+	nimln_(506, "E:\\Software\\nim\\lib\\pure\\parseutils.nim");
 	{
 		NIM_BOOL T3_;
 		NI TM__vI9aZNKIcImom6dDyKXW1ZA_2;
@@ -71,6 +113,7 @@ N_LIB_PRIVATE N_NIMCALL(NI, parseSaturatedNatural_pureZparseutils_316)(NimString
 		i = (NI)(TM__vI9aZNKIcImom6dDyKXW1ZA_2);
 	}
 	LA5_: ;
+	nimln_(507, "E:\\Software\\nim\\lib\\pure\\parseutils.nim");
 	{
 		NIM_BOOL T9_;
 		NI TM__vI9aZNKIcImom6dDyKXW1ZA_10;
@@ -81,8 +124,10 @@ N_LIB_PRIVATE N_NIMCALL(NI, parseSaturatedNatural_pureZparseutils_316)(NimString
 		T9_ = (((NU8)(s->data[i])) >= ((NU8)(48)) && ((NU8)(s->data[i])) <= ((NU8)(57)));
 		LA10_: ;
 		if (!T9_) goto LA11_;
+		nimln_(508, "E:\\Software\\nim\\lib\\pure\\parseutils.nim");
 		(*b) = ((NI) 0);
 		{
+			nimln_(509, "E:\\Software\\nim\\lib\\pure\\parseutils.nim");
 			while (1) {
 				NIM_BOOL T15_;
 				NI c;
@@ -95,9 +140,11 @@ N_LIB_PRIVATE N_NIMCALL(NI, parseSaturatedNatural_pureZparseutils_316)(NimString
 				T15_ = (((NU8)(s->data[i])) >= ((NU8)(48)) && ((NU8)(s->data[i])) <= ((NU8)(57)));
 				LA16_: ;
 				if (!T15_) goto LA14;
+				nimln_(510, "E:\\Software\\nim\\lib\\pure\\parseutils.nim");
 				if ((NU)(i) >= (NU)(s ? s->Sup.len : 0)){ raiseIndexError2(i,(s ? s->Sup.len : 0)-1); }
 				if (nimSubInt(((NU8)(s->data[i])), ((NI) 48), &TM__vI9aZNKIcImom6dDyKXW1ZA_3)) { raiseOverflow(); };
 				c = (NI)(TM__vI9aZNKIcImom6dDyKXW1ZA_3);
+				nimln_(511, "E:\\Software\\nim\\lib\\pure\\parseutils.nim");
 				{
 					NI TM__vI9aZNKIcImom6dDyKXW1ZA_4;
 					NI TM__vI9aZNKIcImom6dDyKXW1ZA_5;
@@ -107,6 +154,7 @@ N_LIB_PRIVATE N_NIMCALL(NI, parseSaturatedNatural_pureZparseutils_316)(NimString
 					if (((NI) 10) == 0){ raiseDivByZero(); }
 					if (nimDivInt((NI)(TM__vI9aZNKIcImom6dDyKXW1ZA_4), ((NI) 10), &TM__vI9aZNKIcImom6dDyKXW1ZA_5)) { raiseOverflow(); };
 					if (!((*b) <= (NI)(TM__vI9aZNKIcImom6dDyKXW1ZA_5))) goto LA19_;
+					nimln_(512, "E:\\Software\\nim\\lib\\pure\\parseutils.nim");
 					if (nimMulInt((*b), ((NI) 10), &TM__vI9aZNKIcImom6dDyKXW1ZA_6)) { raiseOverflow(); };
 					if (nimAddInt((NI)(TM__vI9aZNKIcImom6dDyKXW1ZA_6), c, &TM__vI9aZNKIcImom6dDyKXW1ZA_7)) { raiseOverflow(); };
 					(*b) = (NI)(TM__vI9aZNKIcImom6dDyKXW1ZA_7);
@@ -114,12 +162,15 @@ N_LIB_PRIVATE N_NIMCALL(NI, parseSaturatedNatural_pureZparseutils_316)(NimString
 				goto LA17_;
 				LA19_: ;
 				{
+					nimln_(514, "E:\\Software\\nim\\lib\\pure\\parseutils.nim");
 					(*b) = ((NI) 2147483647);
 				}
 				LA17_: ;
+				nimln_(515, "E:\\Software\\nim\\lib\\pure\\parseutils.nim");
 				if (nimAddInt(i, ((NI) 1), &TM__vI9aZNKIcImom6dDyKXW1ZA_8)) { raiseOverflow(); };
 				i = (NI)(TM__vI9aZNKIcImom6dDyKXW1ZA_8);
 				{
+					nimln_(516, "E:\\Software\\nim\\lib\\pure\\parseutils.nim");
 					while (1) {
 						NIM_BOOL T24_;
 						NI TM__vI9aZNKIcImom6dDyKXW1ZA_9;
@@ -136,9 +187,11 @@ N_LIB_PRIVATE N_NIMCALL(NI, parseSaturatedNatural_pureZparseutils_316)(NimString
 				}
 			} LA14: ;
 		}
+		nimln_(517, "E:\\Software\\nim\\lib\\pure\\parseutils.nim");
 		if (nimSubInt(i, start, &TM__vI9aZNKIcImom6dDyKXW1ZA_10)) { raiseOverflow(); };
 		result = (NI)(TM__vI9aZNKIcImom6dDyKXW1ZA_10);
 	}
 	LA11_: ;
+	popFrame();
 	return result;
 }

@@ -78,7 +78,7 @@ N_LIB_PRIVATE TNimType NTIptrbstr__Pdw3MEiEie9cIIBXdRF4aZg_;
 N_LIB_PRIVATE TNimType NTIchar__nmiMWKVIe46vacnhAFrQvw_;
 N_LIB_PRIVATE TNimType NTIptrchar__9b60r3P3z08159cCfYvgtoSg_;
 static void* TM__Az9aStCqZyHdXRb5O9bpGz9bw_2;
-tyProc__BPQkGXZ9bepMVJITTbu8UUg Dl_70263803_;
+tyProc__BPQkGXZ9bepMVJITTbu8UUg Dl_66069499_;
 N_LIB_PRIVATE N_NIMCALL(void, winim_windefDatInit000)(void) {
 NTIlonglong__Aav8dQoMlCFnZRxA0IhTHQ_.size = sizeof(NI64);
 NTIlonglong__Aav8dQoMlCFnZRxA0IhTHQ_.align = NIM_ALIGNOF(NI64);
@@ -162,6 +162,6 @@ NTIptrchar__9b60r3P3z08159cCfYvgtoSg_.base = (&NTIchar__nmiMWKVIe46vacnhAFrQvw_)
 NTIptrchar__9b60r3P3z08159cCfYvgtoSg_.flags = 3;
 if (!((TM__Az9aStCqZyHdXRb5O9bpGz9bw_2 = nimLoadLibrary(((NimStringDesc*) &TM__Az9aStCqZyHdXRb5O9bpGz9bw_4)))
 )) nimLoadLibraryError(((NimStringDesc*) &TM__Az9aStCqZyHdXRb5O9bpGz9bw_5));
-	Dl_70263803_ = (tyProc__BPQkGXZ9bepMVJITTbu8UUg) nimGetProcAddr(TM__Az9aStCqZyHdXRb5O9bpGz9bw_2, "IsEqualGUID");
+	Dl_66069499_ = (tyProc__BPQkGXZ9bepMVJITTbu8UUg) nimGetProcAddr(TM__Az9aStCqZyHdXRb5O9bpGz9bw_2, "IsEqualGUID");
 }
 

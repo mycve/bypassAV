@@ -16,9 +16,17 @@
 #undef far
 #undef powerpc
 #undef unix
-#define nimfr_(x, y)
-#define nimln_(x, y)
-typedef struct NimStringDesc NimStringDesc;
+  #  define nimfr_(proc, file) \
+      TFrame FR_; \
+      FR_.procname = proc; FR_.filename = file; FR_.line = 0; FR_.len = 0; nimFrame(&FR_);
+
+  #  define nimfrs_(proc, file, slots, length) \
+      struct {TFrame* prev;NCSTRING procname;NI line;NCSTRING filename; NI len; VarSlot s[slots];} FR_; \
+      FR_.procname = proc; FR_.filename = file; FR_.line = 0; FR_.len = length; nimFrame((TFrame*)&FR_);
+
+  #  define nimln_(n, file) \
+      FR_.line = n; FR_.filename = file;
+  typedef struct NimStringDesc NimStringDesc;
 typedef struct TGenericSeq TGenericSeq;
 struct TGenericSeq {
 NI len;
@@ -41,6 +49,9 @@ N_LIB_PRIVATE N_NOINLINE(void, raiseRangeErrorNoArgs)(void);
 static N_INLINE(void, addChars_stdZprivateZdigitsutils_100)(NimStringDesc** result, tyArray__PbS9a6gkxCuxWEnFq4lOU9aw x, NI start, NI n);
 static N_INLINE(void, copyMem_system_1727)(void* dest, void* source, NI size);
 static N_INLINE(void, nimCopyMem)(void* dest, void* source, NI size);
+static N_INLINE(void, nimFrame)(TFrame* s);
+N_LIB_PRIVATE N_NOINLINE(void, callDepthLimitReached_system_2999)(void);
+static N_INLINE(void, popFrame)(void);
 N_LIB_PRIVATE NIM_CONST tyArray__38Z69amCaoywES5tRmClBSw digits100_stdZprivateZdigitsutils_2 = {48,
 48,
 48,
@@ -242,6 +253,12 @@ N_LIB_PRIVATE NIM_CONST tyArray__38Z69amCaoywES5tRmClBSw digits100_stdZprivateZd
 57,
 57}
 ;
+extern TFrame* framePtr_system_2566;
+extern TFrame* framePtr_system_2566;
+extern TFrame* framePtr_system_2566;
+extern TFrame* framePtr_system_2566;
+extern TFrame* framePtr_system_2566;
+extern TFrame* framePtr_system_2566;
 static N_INLINE(void, nimCopyMem)(void* dest, void* source, NI size) {
 	void* T1_;
 	T1_ = (void*)0;
@@ -250,49 +267,88 @@ static N_INLINE(void, nimCopyMem)(void* dest, void* source, NI size) {
 static N_INLINE(void, copyMem_system_1727)(void* dest, void* source, NI size) {
 	nimCopyMem(dest, source, size);
 }
+static N_INLINE(void, nimFrame)(TFrame* s) {
+	{
+		if (!(framePtr_system_2566 == ((TFrame*) NIM_NIL))) goto LA3_;
+		(*s).calldepth = ((NI16) 0);
+	}
+	goto LA1_;
+	LA3_: ;
+	{
+		(*s).calldepth = (NI16)((*framePtr_system_2566).calldepth + ((NI16) 1));
+	}
+	LA1_: ;
+	(*s).prev = framePtr_system_2566;
+	framePtr_system_2566 = s;
+	{
+		if (!((*s).calldepth == ((NI16) 2000))) goto LA8_;
+		callDepthLimitReached_system_2999();
+	}
+	LA8_: ;
+}
+static N_INLINE(void, popFrame)(void) {
+	framePtr_system_2566 = (*framePtr_system_2566).prev;
+}
 static N_INLINE(void, addChars_stdZprivateZdigitsutils_100)(NimStringDesc** result, tyArray__PbS9a6gkxCuxWEnFq4lOU9aw x, NI start, NI n) {
 	NI old;
 	NI TM__J7BLF9cgvwzEso7aEL9cCOKw_7;
+	nimfr_("addChars", "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
+	nimln_(43, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 	old = ((*result) ? (*result)->Sup.len : 0);
+	nimln_(44, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 	if (nimAddInt(old, n, &TM__J7BLF9cgvwzEso7aEL9cCOKw_7)) { raiseOverflow(); };
 	if (((NI)(TM__J7BLF9cgvwzEso7aEL9cCOKw_7)) < ((NI) 0) || ((NI)(TM__J7BLF9cgvwzEso7aEL9cCOKw_7)) > ((NI) 2147483647)){ raiseRangeErrorI((NI)(TM__J7BLF9cgvwzEso7aEL9cCOKw_7), ((NI) 0), ((NI) 2147483647)); }
 	unsureAsgnRef((void**) (&(*result)), setLengthStr((*result), ((NI) ((NI)(TM__J7BLF9cgvwzEso7aEL9cCOKw_7)))));
+	nimln_(52, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 	if ((NU)(old) >= (NU)((*result) ? (*result)->Sup.len : 0)){ raiseIndexError2(old,((*result) ? (*result)->Sup.len : 0)-1); }
 	if ((NU)(start) > (NU)(23)){ raiseIndexError2(start, 23); }
 	if ((n) < ((NI) 0) || (n) > ((NI) 2147483647)){ raiseRangeErrorI(n, ((NI) 0), ((NI) 2147483647)); }
 	copyMem_system_1727(((void*) ((&(*result)->data[old]))), ((void*) ((&x[(start)- 0]))), ((NI) (n)));
+	popFrame();
 }
 static N_INLINE(void, addIntImpl_stdZprivateZdigitsutils_59)(NimStringDesc** result, NU64 x) {
 	tyArray__PbS9a6gkxCuxWEnFq4lOU9aw tmp;
 	NU64 num;
 	NI next;
 	NI TM__J7BLF9cgvwzEso7aEL9cCOKw_8;
+	nimfr_("addIntImpl", "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
+	nimln_(59, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 	num = x;
+	nimln_(60, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 	next = ((NI) 23);
 	{
+		nimln_(63, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 		while (1) {
 			NU64 originNum;
 			NU64 index;
 			NI TM__J7BLF9cgvwzEso7aEL9cCOKw_3;
 			NI TM__J7BLF9cgvwzEso7aEL9cCOKw_4;
 			if (!((NU64)(100ULL) <= (NU64)(num))) goto LA2;
+			nimln_(64, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 			originNum = num;
+			nimln_(65, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 			num = (NU64)((NU64)(num) / (NU64)(100ULL));
+			nimln_(66, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 			index = (NU64)((NU64)((NU64)((NU64)(originNum) - (NU64)((NU64)((NU64)(num) * (NU64)(100ULL))))) << (NU64)(((NI) 1)));
 			if ((NU)(next) > (NU)(23)){ raiseIndexError2(next, 23); }
+			nimln_(67, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 			if ((NU)((NU64)((NU64)(index) + (NU64)(1ULL))) > (NU)(199)){ raiseIndexError2((NU64)((NU64)(index) + (NU64)(1ULL)), 199); }
 			tmp[(next)- 0] = digits100_stdZprivateZdigitsutils_2[((NU64)((NU64)(index) + (NU64)(1ULL)))- 0];
+			nimln_(68, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 			if (nimSubInt(next, ((NI) 1), &TM__J7BLF9cgvwzEso7aEL9cCOKw_3)) { raiseOverflow(); };
 			if ((NU)((NI)(TM__J7BLF9cgvwzEso7aEL9cCOKw_3)) > (NU)(23)){ raiseIndexError2((NI)(TM__J7BLF9cgvwzEso7aEL9cCOKw_3), 23); }
 			if ((NU)(index) > (NU)(199)){ raiseIndexError2(index, 199); }
 			tmp[((NI)(TM__J7BLF9cgvwzEso7aEL9cCOKw_3))- 0] = digits100_stdZprivateZdigitsutils_2[(index)- 0];
+			nimln_(69, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 			if (nimSubInt(next, ((NI) 2), &TM__J7BLF9cgvwzEso7aEL9cCOKw_4)) { raiseOverflow(); };
 			next = (NI)(TM__J7BLF9cgvwzEso7aEL9cCOKw_4);
 		} LA2: ;
 	}
+	nimln_(72, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 	{
 		if (!((NU64)(num) < (NU64)(10ULL))) goto LA5_;
 		if ((NU)(next) > (NU)(23)){ raiseIndexError2(next, 23); }
+		nimln_(73, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 		if ((NU64)((NU64)(48ULL) + (NU64)(num)) > (NU64)(((NI) 255))){ raiseRangeErrorNoArgs(); }
 		tmp[(next)- 0] = ((NIM_CHAR) (((NI) ((NU64)((NU64)(48ULL) + (NU64)(num))))));
 	}
@@ -302,54 +358,74 @@ static N_INLINE(void, addIntImpl_stdZprivateZdigitsutils_59)(NimStringDesc** res
 		NU64 index_2;
 		NI TM__J7BLF9cgvwzEso7aEL9cCOKw_5;
 		NI TM__J7BLF9cgvwzEso7aEL9cCOKw_6;
+		nimln_(75, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 		index_2 = (NU64)((NU64)(num) * (NU64)(2ULL));
 		if ((NU)(next) > (NU)(23)){ raiseIndexError2(next, 23); }
+		nimln_(76, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 		if ((NU)((NU64)((NU64)(index_2) + (NU64)(1ULL))) > (NU)(199)){ raiseIndexError2((NU64)((NU64)(index_2) + (NU64)(1ULL)), 199); }
 		tmp[(next)- 0] = digits100_stdZprivateZdigitsutils_2[((NU64)((NU64)(index_2) + (NU64)(1ULL)))- 0];
+		nimln_(77, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 		if (nimSubInt(next, ((NI) 1), &TM__J7BLF9cgvwzEso7aEL9cCOKw_5)) { raiseOverflow(); };
 		if ((NU)((NI)(TM__J7BLF9cgvwzEso7aEL9cCOKw_5)) > (NU)(23)){ raiseIndexError2((NI)(TM__J7BLF9cgvwzEso7aEL9cCOKw_5), 23); }
 		if ((NU)(index_2) > (NU)(199)){ raiseIndexError2(index_2, 199); }
 		tmp[((NI)(TM__J7BLF9cgvwzEso7aEL9cCOKw_5))- 0] = digits100_stdZprivateZdigitsutils_2[(index_2)- 0];
+		nimln_(78, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 		if (nimSubInt(next, ((NI) 1), &TM__J7BLF9cgvwzEso7aEL9cCOKw_6)) { raiseOverflow(); };
 		next = (NI)(TM__J7BLF9cgvwzEso7aEL9cCOKw_6);
 	}
 	LA3_: ;
+	nimln_(79, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 	if (nimSubInt(((NI) 24), next, &TM__J7BLF9cgvwzEso7aEL9cCOKw_8)) { raiseOverflow(); };
 	addChars_stdZprivateZdigitsutils_100(result, tmp, next, (NI)(TM__J7BLF9cgvwzEso7aEL9cCOKw_8));
+	popFrame();
 }
 N_LIB_PRIVATE N_NIMCALL(void, addInt_stdZprivateZdigitsutils_164)(NimStringDesc** result, NU64 x) {
+	nimfr_("addInt", "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
+	nimln_(84, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 	addIntImpl_stdZprivateZdigitsutils_59(result, x);
+	popFrame();
 }
 N_LIB_PRIVATE N_NIMCALL(void, addInt_stdZprivateZdigitsutils_167)(NimStringDesc** result, NI64 x) {
 	NU64 numX60gensym3_;
+	nimfr_("addInt", "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 	numX60gensym3_ = (NU64)0;
+	nimln_(96, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 	{
 		NI baseX60gensym3_;
 		NI TM__J7BLF9cgvwzEso7aEL9cCOKw_2;
 		if (!(x < IL64(0))) goto LA3_;
+		nimln_(97, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 		{
 			if (!(x == (IL64(-9223372036854775807) - IL64(1)))) goto LA7_;
+			nimln_(98, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 			numX60gensym3_ = ((NU64) (x));
 		}
 		goto LA5_;
 		LA7_: ;
 		{
+			nimln_(100, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 			if (x == (IL64(-9223372036854775807) - IL64(1))){ raiseOverflow(); }
 			numX60gensym3_ = ((NU64) (-(x)));
 		}
 		LA5_: ;
+		nimln_(101, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 		baseX60gensym3_ = ((*result) ? (*result)->Sup.len : 0);
+		nimln_(102, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 		if (nimAddInt(baseX60gensym3_, ((NI) 1), &TM__J7BLF9cgvwzEso7aEL9cCOKw_2)) { raiseOverflow(); };
 		if (((NI)(TM__J7BLF9cgvwzEso7aEL9cCOKw_2)) < ((NI) 0) || ((NI)(TM__J7BLF9cgvwzEso7aEL9cCOKw_2)) > ((NI) 2147483647)){ raiseRangeErrorI((NI)(TM__J7BLF9cgvwzEso7aEL9cCOKw_2), ((NI) 0), ((NI) 2147483647)); }
 		unsureAsgnRef((void**) (&(*result)), setLengthStr((*result), ((NI) ((NI)(TM__J7BLF9cgvwzEso7aEL9cCOKw_2)))));
 		if ((NU)(baseX60gensym3_) >= (NU)((*result) ? (*result)->Sup.len : 0)){ raiseIndexError2(baseX60gensym3_,((*result) ? (*result)->Sup.len : 0)-1); }
+		nimln_(103, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 		(*result)->data[baseX60gensym3_] = 45;
 	}
 	goto LA1_;
 	LA3_: ;
 	{
+		nimln_(105, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 		numX60gensym3_ = ((NU64) (x));
 	}
 	LA1_: ;
+	nimln_(111, "E:\\Software\\nim\\lib\\std\\private\\digitsutils.nim");
 	addInt_stdZprivateZdigitsutils_164(result, numX60gensym3_);
+	popFrame();
 }

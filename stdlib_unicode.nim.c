@@ -15,9 +15,17 @@
 #undef far
 #undef powerpc
 #undef unix
-#define nimfr_(x, y)
-#define nimln_(x, y)
-typedef struct NimStringDesc NimStringDesc;
+  #  define nimfr_(proc, file) \
+      TFrame FR_; \
+      FR_.procname = proc; FR_.filename = file; FR_.line = 0; FR_.len = 0; nimFrame(&FR_);
+
+  #  define nimfrs_(proc, file, slots, length) \
+      struct {TFrame* prev;NCSTRING procname;NI line;NCSTRING filename; NI len; VarSlot s[slots];} FR_; \
+      FR_.procname = proc; FR_.filename = file; FR_.line = 0; FR_.len = length; nimFrame((TFrame*)&FR_);
+
+  #  define nimln_(n, file) \
+      FR_.line = n; FR_.filename = file;
+  typedef struct NimStringDesc NimStringDesc;
 typedef struct TGenericSeq TGenericSeq;
 struct TGenericSeq {
 NI len;
@@ -29,18 +37,54 @@ NIM_CHAR data[SEQ_DECL_SIZE];
 };
 N_LIB_PRIVATE N_NOINLINE(void, raiseIndexError2)(NI i, NI n);
 N_LIB_PRIVATE N_NOINLINE(void, raiseOverflow)(void);
+static N_INLINE(void, nimFrame)(TFrame* s);
+N_LIB_PRIVATE N_NOINLINE(void, callDepthLimitReached_system_2999)(void);
+static N_INLINE(void, popFrame)(void);
 N_LIB_PRIVATE N_NIMCALL(NI, runeLenAt_pureZunicode_65)(NimStringDesc* s, NI i);
 N_LIB_PRIVATE N_NOINLINE(void, raiseRangeErrorI)(NI64 i, NI64 a, NI64 b);
+extern TFrame* framePtr_system_2566;
+extern TFrame* framePtr_system_2566;
+extern TFrame* framePtr_system_2566;
+extern TFrame* framePtr_system_2566;
+extern TFrame* framePtr_system_2566;
+extern TFrame* framePtr_system_2566;
+static N_INLINE(void, nimFrame)(TFrame* s) {
+	{
+		if (!(framePtr_system_2566 == ((TFrame*) NIM_NIL))) goto LA3_;
+		(*s).calldepth = ((NI16) 0);
+	}
+	goto LA1_;
+	LA3_: ;
+	{
+		(*s).calldepth = (NI16)((*framePtr_system_2566).calldepth + ((NI16) 1));
+	}
+	LA1_: ;
+	(*s).prev = framePtr_system_2566;
+	framePtr_system_2566 = s;
+	{
+		if (!((*s).calldepth == ((NI16) 2000))) goto LA8_;
+		callDepthLimitReached_system_2999();
+	}
+	LA8_: ;
+}
+static N_INLINE(void, popFrame)(void) {
+	framePtr_system_2566 = (*framePtr_system_2566).prev;
+}
 N_LIB_PRIVATE N_NIMCALL(NI, nucruneLen)(NimStringDesc* s) {
 	NI result;
 	NI i;
+	nimfr_("runeLen", "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 	result = (NI)0;
+	nimln_(42, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 	result = ((NI) 0);
+	nimln_(43, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 	i = ((NI) 0);
 	{
+		nimln_(44, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 		while (1) {
 			NI TM__e1RUVS0Bw7xmj9cnDPXLJMQ_9;
 			if (!(i < (s ? s->Sup.len : 0))) goto LA2;
+			nimln_(45, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 			{
 				NI TM__e1RUVS0Bw7xmj9cnDPXLJMQ_2;
 				if ((NU)(i) >= (NU)(s ? s->Sup.len : 0)){ raiseIndexError2(i,(s ? s->Sup.len : 0)-1); }
@@ -52,6 +96,7 @@ N_LIB_PRIVATE N_NIMCALL(NI, nucruneLen)(NimStringDesc* s) {
 			LA5_: ;
 			{
 				NI TM__e1RUVS0Bw7xmj9cnDPXLJMQ_3;
+				nimln_(46, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 				if ((NU)(i) >= (NU)(s ? s->Sup.len : 0)){ raiseIndexError2(i,(s ? s->Sup.len : 0)-1); }
 				if (!((NU)((NU32)(((NU) (((NU8)(s->data[i]))))) >> (NU32)(((NI) 5))) == ((NU) 6))) goto LA8_;
 				if (nimAddInt(i, ((NI) 2), &TM__e1RUVS0Bw7xmj9cnDPXLJMQ_3)) { raiseOverflow(); };
@@ -61,6 +106,7 @@ N_LIB_PRIVATE N_NIMCALL(NI, nucruneLen)(NimStringDesc* s) {
 			LA8_: ;
 			{
 				NI TM__e1RUVS0Bw7xmj9cnDPXLJMQ_4;
+				nimln_(47, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 				if ((NU)(i) >= (NU)(s ? s->Sup.len : 0)){ raiseIndexError2(i,(s ? s->Sup.len : 0)-1); }
 				if (!((NU)((NU32)(((NU) (((NU8)(s->data[i]))))) >> (NU32)(((NI) 4))) == ((NU) 14))) goto LA11_;
 				if (nimAddInt(i, ((NI) 3), &TM__e1RUVS0Bw7xmj9cnDPXLJMQ_4)) { raiseOverflow(); };
@@ -70,6 +116,7 @@ N_LIB_PRIVATE N_NIMCALL(NI, nucruneLen)(NimStringDesc* s) {
 			LA11_: ;
 			{
 				NI TM__e1RUVS0Bw7xmj9cnDPXLJMQ_5;
+				nimln_(48, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 				if ((NU)(i) >= (NU)(s ? s->Sup.len : 0)){ raiseIndexError2(i,(s ? s->Sup.len : 0)-1); }
 				if (!((NU)((NU32)(((NU) (((NU8)(s->data[i]))))) >> (NU32)(((NI) 3))) == ((NU) 30))) goto LA14_;
 				if (nimAddInt(i, ((NI) 4), &TM__e1RUVS0Bw7xmj9cnDPXLJMQ_5)) { raiseOverflow(); };
@@ -79,6 +126,7 @@ N_LIB_PRIVATE N_NIMCALL(NI, nucruneLen)(NimStringDesc* s) {
 			LA14_: ;
 			{
 				NI TM__e1RUVS0Bw7xmj9cnDPXLJMQ_6;
+				nimln_(49, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 				if ((NU)(i) >= (NU)(s ? s->Sup.len : 0)){ raiseIndexError2(i,(s ? s->Sup.len : 0)-1); }
 				if (!((NU)((NU32)(((NU) (((NU8)(s->data[i]))))) >> (NU32)(((NI) 2))) == ((NU) 62))) goto LA17_;
 				if (nimAddInt(i, ((NI) 5), &TM__e1RUVS0Bw7xmj9cnDPXLJMQ_6)) { raiseOverflow(); };
@@ -88,6 +136,7 @@ N_LIB_PRIVATE N_NIMCALL(NI, nucruneLen)(NimStringDesc* s) {
 			LA17_: ;
 			{
 				NI TM__e1RUVS0Bw7xmj9cnDPXLJMQ_7;
+				nimln_(50, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 				if ((NU)(i) >= (NU)(s ? s->Sup.len : 0)){ raiseIndexError2(i,(s ? s->Sup.len : 0)-1); }
 				if (!((NU)((NU32)(((NU) (((NU8)(s->data[i]))))) >> (NU32)(((NI) 1))) == ((NU) 126))) goto LA20_;
 				if (nimAddInt(i, ((NI) 6), &TM__e1RUVS0Bw7xmj9cnDPXLJMQ_7)) { raiseOverflow(); };
@@ -97,19 +146,24 @@ N_LIB_PRIVATE N_NIMCALL(NI, nucruneLen)(NimStringDesc* s) {
 			LA20_: ;
 			{
 				NI TM__e1RUVS0Bw7xmj9cnDPXLJMQ_8;
+				nimln_(51, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 				if (nimAddInt(i, ((NI) 1), &TM__e1RUVS0Bw7xmj9cnDPXLJMQ_8)) { raiseOverflow(); };
 				i = (NI)(TM__e1RUVS0Bw7xmj9cnDPXLJMQ_8);
 			}
 			LA3_: ;
+			nimln_(52, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 			if (nimAddInt(result, ((NI) 1), &TM__e1RUVS0Bw7xmj9cnDPXLJMQ_9)) { raiseOverflow(); };
 			result = (NI)(TM__e1RUVS0Bw7xmj9cnDPXLJMQ_9);
 		} LA2: ;
 	}
+	popFrame();
 	return result;
 }
 N_LIB_PRIVATE N_NIMCALL(NI, runeLenAt_pureZunicode_65)(NimStringDesc* s, NI i) {
 	NI result;
+	nimfr_("runeLenAt", "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 	result = (NI)0;
+	nimln_(64, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 	{
 		if ((NU)(i) >= (NU)(s ? s->Sup.len : 0)){ raiseIndexError2(i,(s ? s->Sup.len : 0)-1); }
 		if (!((NU32)(((NU) (((NU8)(s->data[i]))))) <= (NU32)(((NU) 127)))) goto LA3_;
@@ -118,6 +172,7 @@ N_LIB_PRIVATE N_NIMCALL(NI, runeLenAt_pureZunicode_65)(NimStringDesc* s, NI i) {
 	goto LA1_;
 	LA3_: ;
 	{
+		nimln_(65, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 		if ((NU)(i) >= (NU)(s ? s->Sup.len : 0)){ raiseIndexError2(i,(s ? s->Sup.len : 0)-1); }
 		if (!((NU)((NU32)(((NU) (((NU8)(s->data[i]))))) >> (NU32)(((NI) 5))) == ((NU) 6))) goto LA6_;
 		result = ((NI) 2);
@@ -125,6 +180,7 @@ N_LIB_PRIVATE N_NIMCALL(NI, runeLenAt_pureZunicode_65)(NimStringDesc* s, NI i) {
 	goto LA1_;
 	LA6_: ;
 	{
+		nimln_(66, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 		if ((NU)(i) >= (NU)(s ? s->Sup.len : 0)){ raiseIndexError2(i,(s ? s->Sup.len : 0)-1); }
 		if (!((NU)((NU32)(((NU) (((NU8)(s->data[i]))))) >> (NU32)(((NI) 4))) == ((NU) 14))) goto LA9_;
 		result = ((NI) 3);
@@ -132,6 +188,7 @@ N_LIB_PRIVATE N_NIMCALL(NI, runeLenAt_pureZunicode_65)(NimStringDesc* s, NI i) {
 	goto LA1_;
 	LA9_: ;
 	{
+		nimln_(67, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 		if ((NU)(i) >= (NU)(s ? s->Sup.len : 0)){ raiseIndexError2(i,(s ? s->Sup.len : 0)-1); }
 		if (!((NU)((NU32)(((NU) (((NU8)(s->data[i]))))) >> (NU32)(((NI) 3))) == ((NU) 30))) goto LA12_;
 		result = ((NI) 4);
@@ -139,6 +196,7 @@ N_LIB_PRIVATE N_NIMCALL(NI, runeLenAt_pureZunicode_65)(NimStringDesc* s, NI i) {
 	goto LA1_;
 	LA12_: ;
 	{
+		nimln_(68, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 		if ((NU)(i) >= (NU)(s ? s->Sup.len : 0)){ raiseIndexError2(i,(s ? s->Sup.len : 0)-1); }
 		if (!((NU)((NU32)(((NU) (((NU8)(s->data[i]))))) >> (NU32)(((NI) 2))) == ((NU) 62))) goto LA15_;
 		result = ((NI) 5);
@@ -146,6 +204,7 @@ N_LIB_PRIVATE N_NIMCALL(NI, runeLenAt_pureZunicode_65)(NimStringDesc* s, NI i) {
 	goto LA1_;
 	LA15_: ;
 	{
+		nimln_(69, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 		if ((NU)(i) >= (NU)(s ? s->Sup.len : 0)){ raiseIndexError2(i,(s ? s->Sup.len : 0)-1); }
 		if (!((NU)((NU32)(((NU) (((NU8)(s->data[i]))))) >> (NU32)(((NI) 1))) == ((NU) 126))) goto LA18_;
 		result = ((NI) 6);
@@ -153,67 +212,87 @@ N_LIB_PRIVATE N_NIMCALL(NI, runeLenAt_pureZunicode_65)(NimStringDesc* s, NI i) {
 	goto LA1_;
 	LA18_: ;
 	{
+		nimln_(70, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 		result = ((NI) 1);
 	}
 	LA1_: ;
+	popFrame();
 	return result;
 }
 N_LIB_PRIVATE N_NIMCALL(NI, runeOffset_pureZunicode_637)(NimStringDesc* s, NI pos, NI start) {
 	NI result;
 	NI i;
 	NI o;
+	nimfr_("runeOffset", "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 {	result = (NI)0;
+	nimln_(321, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 	i = ((NI) 0);
+	nimln_(322, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 	o = start;
 	{
+		nimln_(323, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 		while (1) {
 			NI T3_;
 			NI TM__e1RUVS0Bw7xmj9cnDPXLJMQ_10;
 			NI TM__e1RUVS0Bw7xmj9cnDPXLJMQ_11;
 			if (!(i < ((NI) (pos)))) goto LA2;
+			nimln_(324, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 			T3_ = (NI)0;
 			T3_ = runeLenAt_pureZunicode_65(s, o);
 			if ((T3_) < ((NI) 0) || (T3_) > ((NI) 2147483647)){ raiseRangeErrorI(T3_, ((NI) 0), ((NI) 2147483647)); }
 			if (nimAddInt(o, ((NI) (T3_)), &TM__e1RUVS0Bw7xmj9cnDPXLJMQ_10)) { raiseOverflow(); };
 			if (TM__e1RUVS0Bw7xmj9cnDPXLJMQ_10 < 0 || TM__e1RUVS0Bw7xmj9cnDPXLJMQ_10 > 2147483647){ raiseOverflow(); }
 			o = (NI)(TM__e1RUVS0Bw7xmj9cnDPXLJMQ_10);
+			nimln_(325, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 			{
 				if (!((s ? s->Sup.len : 0) <= ((NI) (o)))) goto LA6_;
+				nimln_(326, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 				result = ((NI) -1);
 				goto BeforeRet_;
 			}
 			LA6_: ;
+			nimln_(327, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 			if (nimAddInt(i, ((NI) 1), &TM__e1RUVS0Bw7xmj9cnDPXLJMQ_11)) { raiseOverflow(); };
 			i = (NI)(TM__e1RUVS0Bw7xmj9cnDPXLJMQ_11);
 		} LA2: ;
 	}
+	nimln_(328, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 	result = ((NI) (o));
 	goto BeforeRet_;
 	}BeforeRet_: ;
+	popFrame();
 	return result;
 }
 N_LIB_PRIVATE N_NIMCALL(NI, validateUtf8_pureZunicode_277)(NimStringDesc* s) {
 	NI result;
 	NI i;
 	NI L;
+	nimfr_("validateUtf8", "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 {	result = (NI)0;
+	nimln_(174, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 	i = ((NI) 0);
+	nimln_(175, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 	L = (s ? s->Sup.len : 0);
 	{
+		nimln_(176, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 		while (1) {
 			if (!(i < L)) goto LA2;
+			nimln_(177, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 			{
 				NI TM__e1RUVS0Bw7xmj9cnDPXLJMQ_12;
 				if ((NU)(i) >= (NU)(s ? s->Sup.len : 0)){ raiseIndexError2(i,(s ? s->Sup.len : 0)-1); }
 				if (!((NU32)(((NU) (((NU8)(s->data[i]))))) <= (NU32)(((NU) 127)))) goto LA5_;
+				nimln_(178, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 				if (nimAddInt(i, ((NI) 1), &TM__e1RUVS0Bw7xmj9cnDPXLJMQ_12)) { raiseOverflow(); };
 				i = (NI)(TM__e1RUVS0Bw7xmj9cnDPXLJMQ_12);
 			}
 			goto LA3_;
 			LA5_: ;
 			{
+				nimln_(179, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 				if ((NU)(i) >= (NU)(s ? s->Sup.len : 0)){ raiseIndexError2(i,(s ? s->Sup.len : 0)-1); }
 				if (!((NU)((NU32)(((NU) (((NU8)(s->data[i]))))) >> (NU32)(((NI) 5))) == ((NU) 6))) goto LA8_;
+				nimln_(180, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 				{
 					if ((NU)(i) >= (NU)(s ? s->Sup.len : 0)){ raiseIndexError2(i,(s ? s->Sup.len : 0)-1); }
 					if (!((NU32)(((NU) (((NU8)(s->data[i]))))) < (NU32)(((NU) 194)))) goto LA12_;
@@ -221,6 +300,7 @@ N_LIB_PRIVATE N_NIMCALL(NI, validateUtf8_pureZunicode_277)(NimStringDesc* s) {
 					goto BeforeRet_;
 				}
 				LA12_: ;
+				nimln_(181, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 				{
 					NIM_BOOL T16_;
 					NI TM__e1RUVS0Bw7xmj9cnDPXLJMQ_13;
@@ -241,6 +321,7 @@ N_LIB_PRIVATE N_NIMCALL(NI, validateUtf8_pureZunicode_277)(NimStringDesc* s) {
 				goto LA14_;
 				LA18_: ;
 				{
+					nimln_(182, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 					result = i;
 					goto BeforeRet_;
 				}
@@ -249,8 +330,10 @@ N_LIB_PRIVATE N_NIMCALL(NI, validateUtf8_pureZunicode_277)(NimStringDesc* s) {
 			goto LA3_;
 			LA8_: ;
 			{
+				nimln_(183, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 				if ((NU)(i) >= (NU)(s ? s->Sup.len : 0)){ raiseIndexError2(i,(s ? s->Sup.len : 0)-1); }
 				if (!((NU)((NU32)(((NU) (((NU8)(s->data[i]))))) >> (NU32)(((NI) 4))) == ((NU) 14))) goto LA22_;
+				nimln_(184, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 				{
 					NIM_BOOL T26_;
 					NIM_BOOL T27_;
@@ -274,12 +357,14 @@ N_LIB_PRIVATE N_NIMCALL(NI, validateUtf8_pureZunicode_277)(NimStringDesc* s) {
 					T26_ = ((NU)((NU32)(((NU) (((NU8)(s->data[(NI)(TM__e1RUVS0Bw7xmj9cnDPXLJMQ_18)]))))) >> (NU32)(((NI) 6))) == ((NU) 2));
 					LA29_: ;
 					if (!T26_) goto LA30_;
+					nimln_(185, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 					if (nimAddInt(i, ((NI) 3), &TM__e1RUVS0Bw7xmj9cnDPXLJMQ_19)) { raiseOverflow(); };
 					i = (NI)(TM__e1RUVS0Bw7xmj9cnDPXLJMQ_19);
 				}
 				goto LA24_;
 				LA30_: ;
 				{
+					nimln_(186, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 					result = i;
 					goto BeforeRet_;
 				}
@@ -288,8 +373,10 @@ N_LIB_PRIVATE N_NIMCALL(NI, validateUtf8_pureZunicode_277)(NimStringDesc* s) {
 			goto LA3_;
 			LA22_: ;
 			{
+				nimln_(187, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 				if ((NU)(i) >= (NU)(s ? s->Sup.len : 0)){ raiseIndexError2(i,(s ? s->Sup.len : 0)-1); }
 				if (!((NU)((NU32)(((NU) (((NU8)(s->data[i]))))) >> (NU32)(((NI) 3))) == ((NU) 30))) goto LA34_;
+				nimln_(188, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 				{
 					NIM_BOOL T38_;
 					NIM_BOOL T39_;
@@ -299,7 +386,9 @@ N_LIB_PRIVATE N_NIMCALL(NI, validateUtf8_pureZunicode_277)(NimStringDesc* s) {
 					NI TM__e1RUVS0Bw7xmj9cnDPXLJMQ_22;
 					NI TM__e1RUVS0Bw7xmj9cnDPXLJMQ_23;
 					NI TM__e1RUVS0Bw7xmj9cnDPXLJMQ_24;
+					nimln_(189, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 					T38_ = (NIM_BOOL)0;
+					nimln_(188, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 					T39_ = (NIM_BOOL)0;
 					T40_ = (NIM_BOOL)0;
 					if (nimAddInt(i, ((NI) 3), &TM__e1RUVS0Bw7xmj9cnDPXLJMQ_20)) { raiseOverflow(); };
@@ -311,23 +400,27 @@ N_LIB_PRIVATE N_NIMCALL(NI, validateUtf8_pureZunicode_277)(NimStringDesc* s) {
 					LA41_: ;
 					T39_ = T40_;
 					if (!(T39_)) goto LA42_;
+					nimln_(189, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 					if (nimAddInt(i, ((NI) 2), &TM__e1RUVS0Bw7xmj9cnDPXLJMQ_22)) { raiseOverflow(); };
 					if ((NU)((NI)(TM__e1RUVS0Bw7xmj9cnDPXLJMQ_22)) >= (NU)(s ? s->Sup.len : 0)){ raiseIndexError2((NI)(TM__e1RUVS0Bw7xmj9cnDPXLJMQ_22),(s ? s->Sup.len : 0)-1); }
 					T39_ = ((NU)((NU32)(((NU) (((NU8)(s->data[(NI)(TM__e1RUVS0Bw7xmj9cnDPXLJMQ_22)]))))) >> (NU32)(((NI) 6))) == ((NU) 2));
 					LA42_: ;
 					T38_ = T39_;
 					if (!(T38_)) goto LA43_;
+					nimln_(190, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 					if (nimAddInt(i, ((NI) 3), &TM__e1RUVS0Bw7xmj9cnDPXLJMQ_23)) { raiseOverflow(); };
 					if ((NU)((NI)(TM__e1RUVS0Bw7xmj9cnDPXLJMQ_23)) >= (NU)(s ? s->Sup.len : 0)){ raiseIndexError2((NI)(TM__e1RUVS0Bw7xmj9cnDPXLJMQ_23),(s ? s->Sup.len : 0)-1); }
 					T38_ = ((NU)((NU32)(((NU) (((NU8)(s->data[(NI)(TM__e1RUVS0Bw7xmj9cnDPXLJMQ_23)]))))) >> (NU32)(((NI) 6))) == ((NU) 2));
 					LA43_: ;
 					if (!T38_) goto LA44_;
+					nimln_(191, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 					if (nimAddInt(i, ((NI) 4), &TM__e1RUVS0Bw7xmj9cnDPXLJMQ_24)) { raiseOverflow(); };
 					i = (NI)(TM__e1RUVS0Bw7xmj9cnDPXLJMQ_24);
 				}
 				goto LA36_;
 				LA44_: ;
 				{
+					nimln_(192, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 					result = i;
 					goto BeforeRet_;
 				}
@@ -336,14 +429,17 @@ N_LIB_PRIVATE N_NIMCALL(NI, validateUtf8_pureZunicode_277)(NimStringDesc* s) {
 			goto LA3_;
 			LA34_: ;
 			{
+				nimln_(194, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 				result = i;
 				goto BeforeRet_;
 			}
 			LA3_: ;
 		} LA2: ;
 	}
+	nimln_(195, "E:\\Software\\nim\\lib\\pure\\unicode.nim");
 	result = ((NI) -1);
 	goto BeforeRet_;
 	}BeforeRet_: ;
+	popFrame();
 	return result;
 }

@@ -15,11 +15,52 @@
 #undef far
 #undef powerpc
 #undef unix
-#define nimfr_(x, y)
-#define nimln_(x, y)
+  #  define nimfr_(proc, file) \
+      TFrame FR_; \
+      FR_.procname = proc; FR_.filename = file; FR_.line = 0; FR_.len = 0; nimFrame(&FR_);
+
+  #  define nimfrs_(proc, file, slots, length) \
+      struct {TFrame* prev;NCSTRING procname;NI line;NCSTRING filename; NI len; VarSlot s[slots];} FR_; \
+      FR_.procname = proc; FR_.filename = file; FR_.line = 0; FR_.len = length; nimFrame((TFrame*)&FR_);
+
+  #  define nimln_(n, file) \
+      FR_.line = n; FR_.filename = file;
+  static N_INLINE(void, nimFrame)(TFrame* s);
+N_LIB_PRIVATE N_NOINLINE(void, callDepthLimitReached_system_2999)(void);
+static N_INLINE(void, popFrame)(void);
+extern TFrame* framePtr_system_2566;
+extern TFrame* framePtr_system_2566;
+extern TFrame* framePtr_system_2566;
+extern TFrame* framePtr_system_2566;
+extern TFrame* framePtr_system_2566;
+extern TFrame* framePtr_system_2566;
+static N_INLINE(void, nimFrame)(TFrame* s) {
+	{
+		if (!(framePtr_system_2566 == ((TFrame*) NIM_NIL))) goto LA3_;
+		(*s).calldepth = ((NI16) 0);
+	}
+	goto LA1_;
+	LA3_: ;
+	{
+		(*s).calldepth = (NI16)((*framePtr_system_2566).calldepth + ((NI16) 1));
+	}
+	LA1_: ;
+	(*s).prev = framePtr_system_2566;
+	framePtr_system_2566 = s;
+	{
+		if (!((*s).calldepth == ((NI16) 2000))) goto LA8_;
+		callDepthLimitReached_system_2999();
+	}
+	LA8_: ;
+}
+static N_INLINE(void, popFrame)(void) {
+	framePtr_system_2566 = (*framePtr_system_2566).prev;
+}
 N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, winimConverterBOOLToBoolean_6758Z85sersZxZOnimbleZpkgsZwinim4551O55O49ZwinimZutils_5)(NI32 x) {
 	NIM_BOOL result;
+	nimfr_("winimConverterBOOLToBoolean", "C:\\Users\\x\\.nimble\\pkgs\\winim-3.7.1\\winim\\utils.nim");
 	result = (NIM_BOOL)0;
+	nimln_(24, "C:\\Users\\x\\.nimble\\pkgs\\winim-3.7.1\\winim\\utils.nim");
 	{
 		if (!(x == ((NI32) 0))) goto LA3_;
 		result = NIM_FALSE;
@@ -30,5 +71,6 @@ N_LIB_PRIVATE N_NIMCALL(NIM_BOOL, winimConverterBOOLToBoolean_6758Z85sersZxZOnim
 		result = NIM_TRUE;
 	}
 	LA1_: ;
+	popFrame();
 	return result;
 }

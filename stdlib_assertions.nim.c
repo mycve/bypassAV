@@ -15,9 +15,17 @@
 #undef far
 #undef powerpc
 #undef unix
-#define nimfr_(x, y)
-#define nimln_(x, y)
-typedef struct NimStringDesc NimStringDesc;
+  #  define nimfr_(proc, file) \
+      TFrame FR_; \
+      FR_.procname = proc; FR_.filename = file; FR_.line = 0; FR_.len = 0; nimFrame(&FR_);
+
+  #  define nimfrs_(proc, file, slots, length) \
+      struct {TFrame* prev;NCSTRING procname;NI line;NCSTRING filename; NI len; VarSlot s[slots];} FR_; \
+      FR_.procname = proc; FR_.filename = file; FR_.line = 0; FR_.len = length; nimFrame((TFrame*)&FR_);
+
+  #  define nimln_(n, file) \
+      FR_.line = n; FR_.filename = file;
+  typedef struct NimStringDesc NimStringDesc;
 typedef struct TGenericSeq TGenericSeq;
 typedef struct tyObject_AssertionDefect__PtYxPmY5X0dorfvxAFbJpQ tyObject_AssertionDefect__PtYxPmY5X0dorfvxAFbJpQ;
 typedef struct tyObject_Defect__LbeSGvgPzGzXnW9caIkJqMA tyObject_Defect__LbeSGvgPzGzXnW9caIkJqMA;
@@ -196,62 +204,116 @@ static N_INLINE(void, sysFatal_systemZassertions_34)(NimStringDesc* message) __a
 N_LIB_PRIVATE N_NOINLINE(void*, newObj)(TNimType* typ, NI size);
 N_LIB_PRIVATE N_NIMCALL(NimStringDesc*, copyStringRC1)(NimStringDesc* src);
 static N_INLINE(void, nimGCunrefNoCycle)(void* p);
-static N_INLINE(void, decRef_system_5356)(tyObject_Cell__1zcF9cV8XIAtbN8h5HRUB8g* c);
+static N_INLINE(void, decRef_system_5390)(tyObject_Cell__1zcF9cV8XIAtbN8h5HRUB8g* c);
 static N_INLINE(NI, minuspercent__system_716)(NI x, NI y);
+static N_INLINE(void, nimFrame)(TFrame* s);
+N_LIB_PRIVATE N_NOINLINE(void, callDepthLimitReached_system_2999)(void);
+static N_INLINE(void, popFrame)(void);
 static N_INLINE(NIM_BOOL, ltpercent__system_1005)(NI x, NI y);
-static N_INLINE(void, rtlAddZCT_system_5354)(tyObject_Cell__1zcF9cV8XIAtbN8h5HRUB8g* c);
-N_LIB_PRIVATE N_NOINLINE(void, addZCT_system_5305)(tyObject_CellSeq__Axo1XVm9aaQueTOldv8le5w* s, tyObject_Cell__1zcF9cV8XIAtbN8h5HRUB8g* c);
-static N_INLINE(tyObject_Cell__1zcF9cV8XIAtbN8h5HRUB8g*, usrToCell_system_5311)(void* usr);
+static N_INLINE(void, rtlAddZCT_system_5388)(tyObject_Cell__1zcF9cV8XIAtbN8h5HRUB8g* c);
+N_LIB_PRIVATE N_NOINLINE(void, addZCT_system_5339)(tyObject_CellSeq__Axo1XVm9aaQueTOldv8le5w* s, tyObject_Cell__1zcF9cV8XIAtbN8h5HRUB8g* c);
+static N_INLINE(tyObject_Cell__1zcF9cV8XIAtbN8h5HRUB8g*, usrToCell_system_5345)(void* usr);
 N_LIB_PRIVATE N_NIMCALL(void, raiseExceptionEx)(Exception* e, NCSTRING ename, NCSTRING procname, NCSTRING filename, NI line);
 extern TNimType NTIrefassertiondefect__S8DV6hfcgC9c0IiUsAoR29cQ_;
 extern TNimType NTIassertiondefect__PtYxPmY5X0dorfvxAFbJpQ_;
-extern tyObject_GcHeap__1TRH1TZMaVZTnLNcIHuNFQ gch_system_5258;
+extern TFrame* framePtr_system_2566;
+extern TFrame* framePtr_system_2566;
+extern TFrame* framePtr_system_2566;
+extern TFrame* framePtr_system_2566;
+extern TFrame* framePtr_system_2566;
+extern TFrame* framePtr_system_2566;
+extern tyObject_GcHeap__1TRH1TZMaVZTnLNcIHuNFQ gch_system_5292;
 N_LIB_PRIVATE N_NIMCALL(void, eqdestroy__systemZassertions_23)(NimStringDesc** dest) {
+}
+static N_INLINE(void, nimFrame)(TFrame* s) {
+	{
+		if (!(framePtr_system_2566 == ((TFrame*) NIM_NIL))) goto LA3_;
+		(*s).calldepth = ((NI16) 0);
+	}
+	goto LA1_;
+	LA3_: ;
+	{
+		(*s).calldepth = (NI16)((*framePtr_system_2566).calldepth + ((NI16) 1));
+	}
+	LA1_: ;
+	(*s).prev = framePtr_system_2566;
+	framePtr_system_2566 = s;
+	{
+		if (!((*s).calldepth == ((NI16) 2000))) goto LA8_;
+		callDepthLimitReached_system_2999();
+	}
+	LA8_: ;
+}
+static N_INLINE(void, popFrame)(void) {
+	framePtr_system_2566 = (*framePtr_system_2566).prev;
 }
 static N_INLINE(NI, minuspercent__system_716)(NI x, NI y) {
 	NI result;
+	nimfr_("-%", "E:\\Software\\nim\\lib\\system\\arithmetics.nim");
 	result = (NI)0;
+	nimln_(414, "E:\\Software\\nim\\lib\\system\\arithmetics.nim");
+	nimln_(418, "E:\\Software\\nim\\lib\\system\\arithmetics.nim");
 	result = ((NI) ((NU)((NU32)(((NU) (x))) - (NU32)(((NU) (y))))));
+	popFrame();
 	return result;
 }
 static N_INLINE(NIM_BOOL, ltpercent__system_1005)(NI x, NI y) {
 	NIM_BOOL result;
+	nimfr_("<%", "E:\\Software\\nim\\lib\\system\\comparisons.nim");
 	result = (NIM_BOOL)0;
+	nimln_(186, "E:\\Software\\nim\\lib\\system\\comparisons.nim");
+	nimln_(188, "E:\\Software\\nim\\lib\\system\\comparisons.nim");
 	result = ((NU32)(((NU) (x))) < (NU32)(((NU) (y))));
+	popFrame();
 	return result;
 }
-static N_INLINE(void, rtlAddZCT_system_5354)(tyObject_Cell__1zcF9cV8XIAtbN8h5HRUB8g* c) {
-	addZCT_system_5305((&gch_system_5258.zct), c);
+static N_INLINE(void, rtlAddZCT_system_5388)(tyObject_Cell__1zcF9cV8XIAtbN8h5HRUB8g* c) {
+	nimfr_("rtlAddZCT", "E:\\Software\\nim\\lib\\system\\gc.nim");
+	nimln_(243, "E:\\Software\\nim\\lib\\system\\gc.nim");
+	addZCT_system_5339((&gch_system_5292.zct), c);
+	popFrame();
 }
-static N_INLINE(void, decRef_system_5356)(tyObject_Cell__1zcF9cV8XIAtbN8h5HRUB8g* c) {
+static N_INLINE(void, decRef_system_5390)(tyObject_Cell__1zcF9cV8XIAtbN8h5HRUB8g* c) {
+	nimfr_("decRef", "E:\\Software\\nim\\lib\\system\\gc.nim");
+	nimln_(248, "E:\\Software\\nim\\lib\\system\\gc.nim");
 	(*c).refcount = minuspercent__system_716((*c).refcount, ((NI) 8));
+	nimln_(249, "E:\\Software\\nim\\lib\\system\\gc.nim");
 	{
 		NIM_BOOL T3_;
 		T3_ = (NIM_BOOL)0;
 		T3_ = ltpercent__system_1005((*c).refcount, ((NI) 8));
 		if (!T3_) goto LA4_;
-		rtlAddZCT_system_5354(c);
+		nimln_(250, "E:\\Software\\nim\\lib\\system\\gc.nim");
+		rtlAddZCT_system_5388(c);
 	}
 	LA4_: ;
+	popFrame();
 }
-static N_INLINE(tyObject_Cell__1zcF9cV8XIAtbN8h5HRUB8g*, usrToCell_system_5311)(void* usr) {
+static N_INLINE(tyObject_Cell__1zcF9cV8XIAtbN8h5HRUB8g*, usrToCell_system_5345)(void* usr) {
 	tyObject_Cell__1zcF9cV8XIAtbN8h5HRUB8g* result;
 	NI T1_;
+	nimfr_("usrToCell", "E:\\Software\\nim\\lib\\system\\gc.nim");
 	result = (tyObject_Cell__1zcF9cV8XIAtbN8h5HRUB8g*)0;
+	nimln_(177, "E:\\Software\\nim\\lib\\system\\gc.nim");
 	T1_ = (NI)0;
 	T1_ = minuspercent__system_716(((NI) (ptrdiff_t) (usr)), ((NI) 8));
 	result = ((tyObject_Cell__1zcF9cV8XIAtbN8h5HRUB8g*) (T1_));
+	popFrame();
 	return result;
 }
 static N_INLINE(void, nimGCunrefNoCycle)(void* p) {
 	tyObject_Cell__1zcF9cV8XIAtbN8h5HRUB8g* T1_;
+	nimfr_("nimGCunrefNoCycle", "E:\\Software\\nim\\lib\\system\\gc.nim");
+	nimln_(276, "E:\\Software\\nim\\lib\\system\\gc.nim");
 	T1_ = (tyObject_Cell__1zcF9cV8XIAtbN8h5HRUB8g*)0;
-	T1_ = usrToCell_system_5311(p);
-	decRef_system_5356(T1_);
+	T1_ = usrToCell_system_5345(p);
+	decRef_system_5390(T1_);
+	popFrame();
 }
 static N_INLINE(void, sysFatal_systemZassertions_34)(NimStringDesc* message) {
 	tyObject_AssertionDefect__PtYxPmY5X0dorfvxAFbJpQ* T1_;
 	NimStringDesc* T2_;
+	nimfr_("sysFatal", "E:\\Software\\nim\\lib\\system\\fatal.nim");
 	T1_ = (tyObject_AssertionDefect__PtYxPmY5X0dorfvxAFbJpQ*)0;
 	T1_ = (tyObject_AssertionDefect__PtYxPmY5X0dorfvxAFbJpQ*) newObj((&NTIrefassertiondefect__S8DV6hfcgC9c0IiUsAoR29cQ_), sizeof(tyObject_AssertionDefect__PtYxPmY5X0dorfvxAFbJpQ));
 	(*T1_).Sup.Sup.Sup.m_type = (&NTIassertiondefect__PtYxPmY5X0dorfvxAFbJpQ_);
@@ -259,11 +321,19 @@ static N_INLINE(void, sysFatal_systemZassertions_34)(NimStringDesc* message) {
 	T2_ = (NimStringDesc*)0;
 	T2_ = (*T1_).Sup.Sup.message; (*T1_).Sup.Sup.message = copyStringRC1(message);
 	if (T2_) nimGCunrefNoCycle(T2_);
-	raiseExceptionEx((Exception*)T1_, "AssertionDefect", "sysFatal", "fatal.nim", 53);
+	nimln_(53, "E:\\Software\\nim\\lib\\system\\fatal.nim");
+	raiseExceptionEx((Exception*)T1_, "AssertionDefect", "sysFatal", "E:\\Software\\nim\\lib\\system\\fatal.nim", 53);
+	popFrame();
 }
 N_LIB_PRIVATE N_NOINLINE(void, raiseAssert_systemZassertions_32)(NimStringDesc* msg) {
+	nimfr_("raiseAssert", "E:\\Software\\nim\\lib\\system\\assertions.nim");
+	nimln_(28, "E:\\Software\\nim\\lib\\system\\assertions.nim");
 	sysFatal_systemZassertions_34(msg);
+	popFrame();
 }
 N_LIB_PRIVATE N_NIMCALL(void, failedAssertImpl_systemZassertions_56)(NimStringDesc* msg) {
+	nimfr_("failedAssertImpl", "E:\\Software\\nim\\lib\\system\\assertions.nim");
+	nimln_(38, "E:\\Software\\nim\\lib\\system\\assertions.nim");
 	raiseAssert_systemZassertions_32(msg);
+	popFrame();
 }
